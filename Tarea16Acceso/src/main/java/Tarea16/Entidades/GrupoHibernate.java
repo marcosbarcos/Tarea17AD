@@ -1,0 +1,63 @@
+package Tarea16.Entidades;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "grupos")
+public class GrupoHibernate {
+	@Id
+	private int codigo;
+	@Column(name = "nombre", nullable = false, length = 30)
+	private String nombre;
+	@OneToMany
+	@JoinColumn(name = "idgrupo", referencedColumnName = "codigo") 	//En la propia clase tienes que crear el campo referenciado "codigo" por la tabla que referencoia, campo "idgrupo"
+	private List<AlumnoHibernate> alumnos;
+
+	public GrupoHibernate(int codigo, String nombre) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+	}
+	
+	public GrupoHibernate() {
+	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public ArrayList<AlumnoHibernate> getAlumnos() {
+		return alumnos;
+	}
+	
+	public void setAlumnos(ArrayList<AlumnoHibernate> alumnos) {
+		this.alumnos = alumnos;
+	}
+	
+	@Override
+	public String toString() {
+		return "Grupo [codigo=" + codigo + ", nombre=" + nombre + "]";
+	}
+	 
+	
+}

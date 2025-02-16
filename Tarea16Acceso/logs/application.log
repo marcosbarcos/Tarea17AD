@@ -1,0 +1,55 @@
+2025-01-19 16:42:18 [main] INFO  Tarea15.AlumnoImplementacionBBDD - Alumno creado con exito
+2025-01-26 20:15:07 [main] ERROR Tarea16.AlumnoImplementacionBBDD - Algo ha fallado
+2025-01-26 20:16:16 [main] INFO  Tarea16.AlumnoImplementacionBBDD - Alumno modificado con exito
+2025-02-16 13:51:27 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: Persistencia]
+2025-02-16 13:51:27 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.6.Final
+2025-02-16 13:51:27 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-16 13:51:27 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-02-16 13:51:27 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-16 13:51:27 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost/tarea17]
+	Database driver: com.mysql.jdbc.Driver
+	Database version: 8.0.36
+	Autocommit mode: false
+	Isolation level: undefined/unknown
+	Minimum pool size: 1
+	Maximum pool size: 20
+2025-02-16 13:52:25 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: Persistencia]
+2025-02-16 13:52:25 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.6.Final
+2025-02-16 13:52:25 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-16 13:52:26 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-02-16 13:52:26 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-16 13:52:26 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost/tarea17]
+	Database driver: com.mysql.jdbc.Driver
+	Database version: 8.0.36
+	Autocommit mode: false
+	Isolation level: undefined/unknown
+	Minimum pool size: 1
+	Maximum pool size: 20
+2025-02-16 14:04:46 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: Persistencia]
+2025-02-16 14:04:46 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.6.Final
+2025-02-16 14:04:47 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-16 14:04:47 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-02-16 14:04:47 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-16 14:04:47 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost/tarea17]
+	Database driver: com.mysql.jdbc.Driver
+	Database version: 8.0.36
+	Autocommit mode: false
+	Isolation level: undefined/unknown
+	Minimum pool size: 1
+	Maximum pool size: 20
+2025-02-16 14:10:36 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: Persistencia]
+2025-02-16 14:10:36 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.6.Final
+2025-02-16 14:10:36 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-16 14:10:36 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-02-16 14:10:37 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-16 14:10:37 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost/tarea17]
+	Database driver: com.mysql.jdbc.Driver
+	Database version: 8.0.36
+	Autocommit mode: false
+	Isolation level: undefined/unknown
+	Minimum pool size: 1
+	Maximum pool size: 20
