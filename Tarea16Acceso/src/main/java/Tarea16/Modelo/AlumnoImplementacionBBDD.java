@@ -27,7 +27,7 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 		int result = 0;
 		try(Connection conexion = MyDataSource.getConnection();
 			PreparedStatement consulta = conexion.prepareStatement(sql)) {
-			if(buscarGrupoPorCodigo(alumno.getGrupo()) == null) {
+			if(alumno.getGrupo() == null) {
 				logger.error("El grupo introducido no existe");
 			}
 			else {
@@ -38,7 +38,7 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 				consulta.setDate(5, new java.sql.Date(alumno.getFecha_nacimiento().getTime()));
 				consulta.setString(6, alumno.getCiclo());
 				consulta.setString(7, alumno.getCurso());
-				consulta.setInt(8, alumno.getGrupo());
+				consulta.setInt(8, alumno.getGrupo().getCodigo());
 			}
 			result = consulta.executeUpdate();
 			logger.info("Alumno creado con exito");
@@ -84,7 +84,7 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 				a.setFecha_nacimiento(rs.getDate("FechaDeNacimiento"));
 				a.setCiclo(rs.getString("Ciclo"));
 				a.setCurso(rs.getString("Curso"));
-				a.setGrupo(rs.getInt("Grupo"));
+				a.setGrupo(buscarGrupoPorCodigo(rs.getInt("Grupo")));
 				result.add(a);
 			}
 		} catch (SQLException e) {

@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "grupos")
@@ -17,8 +18,7 @@ public class GrupoHibernate {
 	private int codigo;
 	@Column(name = "nombre", nullable = false, length = 30)
 	private String nombre;
-	@OneToMany
-	@JoinColumn(name = "idgrupo", referencedColumnName = "codigo") 	//En la propia clase tienes que crear el campo referenciado "codigo" por la tabla que referencoia, campo "idgrupo"
+	@Transient
 	private List<AlumnoHibernate> alumnos;
 
 	public GrupoHibernate(int codigo, String nombre) {
@@ -46,7 +46,7 @@ public class GrupoHibernate {
 		this.nombre = nombre;
 	}
 	
-	public ArrayList<AlumnoHibernate> getAlumnos() {
+	public List<AlumnoHibernate> getAlumnos() {
 		return alumnos;
 	}
 	

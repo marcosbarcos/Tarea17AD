@@ -11,12 +11,12 @@ public class Alumno implements Serializable{
 	private Date fecha_nacimiento;
 	private String ciclo;
 	private String curso;
-	private int grupo;
+	private Grupo grupo;
 	
 public Alumno() {
 }
 
-public Alumno(int nia, String nombre, String apellidos, String genero, Date fecha_nacimiento, String ciclo, String curso, int grupo) {
+public Alumno(int nia, String nombre, String apellidos, String genero, Date fecha_nacimiento, String ciclo, String curso, Grupo grupo) {
 	this.nia = nia;
 	this.nombre = nombre;
 	this.apellidos = apellidos;
@@ -84,11 +84,11 @@ public void setCurso(String curso) {
 	this.curso = curso;
 }
 
-public int getGrupo() {
+public Grupo getGrupo() {
 	return grupo;
 }
 
-public void setGrupo(int grupo) {
+public void setGrupo(Grupo grupo) {
 	this.grupo = grupo;
 }
 
