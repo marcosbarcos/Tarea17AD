@@ -6,6 +6,8 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,7 +28,8 @@ public class AlumnoHibernate implements Serializable{
 	private String ciclo;
 	@Column(name = "curso", nullable = true, length = 30)
 	private String curso;
-	@Column(name = "idgrupo", nullable = true)
+	@ManyToOne
+	@JoinColumn(name = "idgrupo", referencedColumnName = "codigo", nullable = false)
 	private Grupo grupo;
 	
 public AlumnoHibernate() {

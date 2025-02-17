@@ -5,6 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -15,6 +17,7 @@ import jakarta.persistence.Transient;
 @Table(name = "grupos")
 public class GrupoHibernate {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Auto-Increment
 	private int codigo;
 	@Column(name = "nombre", nullable = false, length = 30)
 	private String nombre;

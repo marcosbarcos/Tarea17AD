@@ -128,7 +128,7 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 			ps.setDate(4, new java.sql.Date(alumno.getFecha_nacimiento().getTime()));
 			ps.setString(5, alumno.getCiclo());
 			ps.setString(6, alumno.getCurso());
-			ps.setInt(7, alumno.getGrupo());
+			ps.setInt(7, alumno.getGrupo().getCodigo());
 			ps.setInt(8, alumno.getNia());
 			result = ps.executeUpdate();
 			logger.info("Alumno modificado con exito");
@@ -209,7 +209,7 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 				a.setFecha_nacimiento(rs.getDate("FechaDeNacimiento"));
 				a.setCiclo(rs.getString("Ciclo"));
 				a.setCurso(rs.getString("Curso"));
-				a.setGrupo(rs.getInt("Grupo"));
+				a.setGrupo(buscarGrupoPorCodigo(rs.getInt("Grupo")));
 				result.add(a);
 			}
 		} catch (SQLException e) {
@@ -237,7 +237,7 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 					a.setFecha_nacimiento(rs.getDate("FechaDeNacimiento"));
 					a.setCiclo(rs.getString("Ciclo"));
 					a.setCurso(rs.getString("Curso"));
-					a.setGrupo(rs.getInt("Grupo"));
+					a.setGrupo(buscarGrupoPorCodigo(rs.getInt("Grupo")));
 				}
 			}
 		} catch (SQLException e) {

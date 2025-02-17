@@ -1,3 +1,4 @@
+
 package Tarea16.Controlador;
 
 
@@ -38,8 +39,23 @@ public class Controlador {
 						a.setCiclo(vista.pedirRespuestaString());
 						vista.mostrarMensaje("Dame el curso del alumno");
 						a.setCurso(vista.pedirRespuestaString());
-						vista.mostrarMensaje("Dame el codigo del grupo del alumno");
-						a.setGrupo(vista.pedirRespuestaInt());
+						vista.mostrarMensaje("Dame el codigo del Grupo");
+						if(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()).equals(null)) {
+							vista.mostrarMensaje("El Grupo insertado no existe, ¿deseas crearlo?");
+							if(vista.pedirRespuestaString().equalsIgnoreCase("si")) {
+								vista.mostrarMensaje("Dame el nombre del Grupo");
+								Grupo g = new Grupo(0, vista.pedirRespuestaString());
+								modelo.insertarGrupo(g);
+							}
+							else {
+								vista.mostrarMensaje("Alumno no creado");
+							}
+						}
+						else {
+							a.setGrupo(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()));
+						}
+						
+						
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
