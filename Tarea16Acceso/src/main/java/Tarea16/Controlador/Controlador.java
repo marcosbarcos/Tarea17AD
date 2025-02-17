@@ -53,33 +53,38 @@ public class Controlador {
 						}
 						else {
 							a.setGrupo(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()));
-						}
-						
-						
+							modelo.insertarAlumno(a);
+						}	
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-//					Alumno a = new Alumno();
-//					a.setNombre(vista.pedirDatosAlumno());
-//					
-//					alumnos = null;
-//					grupos = null;
-//					Grupo g = modelo.buscarGrupoPorCodigo(vista.pedirRespuestaNumero());
-//					alumnos = modelo.mostrarAlumnosporGrupo(g);
-//					vista.mostrarAlumnos(alumnos);
 					break;
 				case 2:
-					alumnos = null;
-					grupos = null;
-					alumnos = modelo.mostrarTodosAlumnos();
-					vista.mostrarAlumnosmasCodigo(alumnos);
-					Alumno a1 = modelo.mostrarAlumnoPorCodigo(vista.pedirRespuestaInt());
-					vista.mostrarAlumno(a1);
+					vista.mostrarMensaje("Dame el nombre del Grupo");
+					Grupo g = new Grupo(0, vista.pedirRespuestaString());
 					break;
 				case 3:
 					alumnos = modelo.mostrarTodosAlumnos();
-					vista.mostrarAlumnosmasCodigo(alumnos);
+					vista.mostrarAlumnos(alumnos);
+					break;
+				case 4:
+					
+					break;
+				case 5:
+					
+					break;
+				case 6:
+					
+					break;
+				case 7:
+					
+					break;
+				case 8:
+					
+					break;
+				case 9:
+					
 					break;
 				default:
 					break;
