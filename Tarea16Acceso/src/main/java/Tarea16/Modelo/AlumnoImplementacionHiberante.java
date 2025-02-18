@@ -66,7 +66,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		List<AlumnoHibernate> alumnosHibernate = new ArrayList<AlumnoHibernate>();
 		em = emf.createEntityManager();
 		try {
-			alumnosHibernate = em.createQuery("FROM grupos").getResultList();
+			alumnosHibernate = em.createQuery("FROM GrupoHibernate").getResultList();
 			List<Alumno> alumnos = new ArrayList<Alumno>();
 			for (AlumnoHibernate alumnoHibernate : alumnosHibernate) {
 				alumnos.add(convertirAlumno(alumnoHibernate));
@@ -88,7 +88,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		List<GrupoHibernate> gruposHibernate = new ArrayList<GrupoHibernate>();
 		em = emf.createEntityManager();
 		try {
-			gruposHibernate = em.createQuery("FROM grupos").getResultList();
+			gruposHibernate = em.createQuery("FROM GrupoHibernate").getResultList();
 			List<Grupo> grupos = new ArrayList<Grupo>();
 			for (GrupoHibernate grupoH : gruposHibernate) {
 				grupos.add(convertirGrupo(grupoH));
@@ -168,7 +168,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	public Grupo buscarGrupoPorCodigo(int codigo) {
 		em = emf.createEntityManager();
 		try {
-			GrupoHibernate gh = (GrupoHibernate) em.createQuery("FROM grupo WHERE codigo = :codigoGrupo")
+			GrupoHibernate gh = (GrupoHibernate) em.createQuery("FROM GrupoHibernate WHERE codigo = :codigoGrupo")
 					.setParameter("codigoGrupo", codigo)
 					.getSingleResult();
 			return convertirGrupo(gh);
@@ -190,7 +190,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		List<AlumnoHibernate> alumnosHB = new ArrayList<AlumnoHibernate>();
 		em = emf.createEntityManager();
 		try {
-			em.createQuery("FROM alumnos WHERE idgrupo = :codigoGrupo")
+			em.createQuery("FROM AlumnoHibernate WHERE idgrupo = :codigoGrupo")
 			.setParameter("codigoGrupo", grupo)
 			.getResultList();
 		}catch(Exception e) {
@@ -207,7 +207,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	public Alumno mostrarAlumnoPorCodigo(int codigo) {
 		em = emf.createEntityManager();
 		try {
-			AlumnoHibernate ah = (AlumnoHibernate) em.createQuery("FROM alumnos WHERE codigo = :codigo")
+			AlumnoHibernate ah = (AlumnoHibernate) em.createQuery("FROM AlumnoHibernate WHERE codigo = :codigo")
 			.setParameter(":codigo", codigo)
 			.getSingleResult();
 			return convertirAlumno(ah);
