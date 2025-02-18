@@ -29,7 +29,7 @@ public class AlumnoHibernate implements Serializable{
 	@Column(name = "curso", nullable = true, length = 30)
 	private String curso;
 	@ManyToOne
-	@JoinColumn(name = "idgrupo", referencedColumnName = "codigo", nullable = false)
+	@JoinColumn(name = "idgrupo", nullable = true)
 	private Grupo grupo;
 	
 public AlumnoHibernate() {

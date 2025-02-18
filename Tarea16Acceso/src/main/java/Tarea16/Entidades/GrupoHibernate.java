@@ -8,10 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+
 
 @Entity
 @Table(name = "grupos")
@@ -21,7 +20,7 @@ public class GrupoHibernate {
 	private int codigo;
 	@Column(name = "nombre", nullable = false, length = 30)
 	private String nombre;
-	@Transient
+	@OneToMany(mappedBy = "grupo") //Indica que alumno es el dueño de la relacion
 	private List<AlumnoHibernate> alumnos;
 
 	public GrupoHibernate(int codigo, String nombre) {

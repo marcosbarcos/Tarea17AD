@@ -15,21 +15,21 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class AlumnoImplementacionHiberante implements AlumnoDAO {
-	private static final Logger logger = LogManager.getLogger(AlumnoImplementacionBBDD.class);
+	private static final Logger logger = LogManager.getLogger(AlumnoImplementacionHiberante.class);
 	
-	private EntityManagerFactory emf;
+	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persistencia");;
 	private EntityManager em;
 	
 	@Override
 	public int insertarAlumno(Alumno alumno) {
 		AlumnoHibernate alumnoHB = convertirAlumnoHibernate(alumno);
 		try {
-			emf = Persistence.createEntityManagerFactory("Persistencia");
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			em.persist(alumnoHB);
+			for (int i = 0; i < 50; i++) {
+				em.persist(alumnoHB);
+			}
 			em.getTransaction().commit();
-			emf.close();
 			em.close();
 			return 1;
 		}catch(Exception e) {
@@ -37,7 +37,6 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 				em.getTransaction().rollback();
 			}
 			logger.error("Trasaccion Fallida");
-			emf.close();
 			em.close();
 			return 0;
 		}
@@ -48,12 +47,10 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	public int insertarGrupo(Grupo grupo) {
 		GrupoHibernate grupoo = convertirGrupoHibernate(grupo);
 		try {
-			emf = Persistence.createEntityManagerFactory("Persistencia");
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
 			em.persist(grupoo);
 			em.getTransaction().commit();
-			emf.close();
 			em.close();
 			return 1;
 		}catch(Exception e) {
@@ -61,7 +58,6 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 				em.getTransaction().rollback();
 			}
 			logger.error("Transaccion Fallida");
-			emf.close();
 			em.close();
 			return 0;
 		}
@@ -71,7 +67,6 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	public List<Alumno> mostrarTodosAlumnos() {
 		List<AlumnoHibernate> alumnosHibernate = new ArrayList<AlumnoHibernate>();
 		try {
-			emf = Persistence.createEntityManagerFactory("Persistencia");
 			em = emf.createEntityManager();
 			alumnosHibernate = em.createQuery("FROM grupos").getResultList();
 			List<Alumno> alumnos = new ArrayList<Alumno>();
@@ -81,12 +76,10 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 			return alumnos;
 		} catch (Exception e) {
 			logger.error("Transaccion Fallida");
+			
 		} finally {
 	        if (em != null) {
 	            em.close();
-	        }
-	        if (emf != null) {
-	            emf.close();
 	        }
 	    }
 		return null;
@@ -96,7 +89,6 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	public List<Grupo> mostrarTodosGrupos() {
 		List<GrupoHibernate> gruposHibernate = new ArrayList<GrupoHibernate>();
 		try {
-			emf = Persistence.createEntityManagerFactory("Persistencia");
 			em = emf.createEntityManager();
 			gruposHibernate = em.createQuery("FROM grupos").getResultList();
 			List<Grupo> grupos = new ArrayList<Grupo>();
@@ -105,13 +97,13 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 			}
 			return grupos;
 		}catch(Exception e) {
+			if(em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
 			logger.error("Transaccion Fallida");
 		}finally {
 			if(em != null) {
 				em.close();
-			}
-			if (emf != null) {
-				emf.close();
 			}
 		}
 		return null;
@@ -120,7 +112,6 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	@Override
 	public int modificarAlumno(Alumno alumno) {
 		try {
-			emf = Persistence.createEntityManagerFactory("Persistencia");
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
 			AlumnoHibernate alumnoHibernate = convertirAlumnoHibernate(alumno);
@@ -135,6 +126,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 				buscarAlumno.setGrupo(alumnoHibernate.getGrupo());
 				em.merge(buscarAlumno);
 				em.getTransaction().commit();
+				return 1;
 			}
 		}catch(Exception e) {
 			if(em != null && em.getTransaction().isActive()) {
@@ -145,12 +137,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 			if(em != null) {
 				em.close();
 			}
-			if(emf != null) {
-				emf.close();
-			}
  		}
-
-		
 		return 0;
 	}
 
@@ -168,7 +155,22 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 
 	@Override
 	public Grupo buscarGrupoPorCodigo(int codigo) {
-		// TODO Auto-generated method stub
+		try {
+			em = emf.createEntityManager();
+			GrupoHibernate gh = (GrupoHibernate) em.createQuery("FROM grupo WHERE codigo = :codigoGrupo")
+					.setParameter("codigoGrupo", codigo)
+					.getSingleResult();
+			return convertirGrupo(gh);
+		}catch(Exception e) {
+			if(em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			logger.error("Transaccion Fallida");
+		}finally {
+			if(em != null) {
+				em.close();
+			}
+		}
 		return null;
 	}
 
@@ -181,13 +183,9 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	@Override
 	public Alumno mostrarAlumnoPorCodigo(int codigo) {
 		try {
-			emf = Persistence.createEntityManagerFactory("Persistencia");
 			em = emf.createEntityManager();
-			em.createQuery("FROM alumnos");
-		}catch(Exception e
-				
-				
-				) {
+			em.createQuery("FROM alumnos WHERE codigo");
+		}catch(Exception e) {
 			
 		}
 		return null;

@@ -1,7 +1,6 @@
 
 package Tarea16.Controlador;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -21,99 +20,73 @@ public class Controlador {
 		do {
 			vista.mostrarMenu();
 			res = vista.pedirRespuestaInt();
-			switch(res) {
-				case 1: 
-					try {
-						Alumno a = new Alumno();
-						vista.mostrarMensaje("Dame el nombre del alumno");
-						a.setNombre(vista.pedirRespuestaString());
-						vista.mostrarMensaje("Dame el NIA del alumno");
-						a.setNia(vista.pedirRespuestaInt());
-						vista.mostrarMensaje("Dame el apellido del alumno");
-						a.setApellidos(vista.pedirRespuestaString());
-						vista.mostrarMensaje("Dame el genero del alumno");
-						a.setGenero(vista.pedirRespuestaString());
-						vista.mostrarMensaje("Dame la fecha de nacimiento del alumno");
-						a.setFecha_nacimiento(formato.parse(vista.pedirRespuestaString()));
-						vista.mostrarMensaje("Dame el cilo del alumno");
-						a.setCiclo(vista.pedirRespuestaString());
-						vista.mostrarMensaje("Dame el curso del alumno");
-						a.setCurso(vista.pedirRespuestaString());
-						vista.mostrarMensaje("Dame el codigo del Grupo");
-						if(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()).equals(null)) {
-							vista.mostrarMensaje("El Grupo insertado no existe, ¿deseas crearlo?");
-							if(vista.pedirRespuestaString().equalsIgnoreCase("si")) {
-								vista.mostrarMensaje("Dame el nombre del Grupo");
-								Grupo g = new Grupo(0, vista.pedirRespuestaString());
-								modelo.insertarGrupo(g);
-							}
-							else {
-								vista.mostrarMensaje("Alumno no creado");
-							}
+			switch (res) {
+			case 1:
+				try {
+					Alumno a = new Alumno();
+					vista.mostrarMensaje("Dame el nombre del alumno");
+					a.setNombre(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el NIA del alumno");
+					a.setNia(vista.pedirRespuestaInt());
+					vista.mostrarMensaje("Dame el apellido del alumno");
+					a.setApellidos(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el genero del alumno");
+					a.setGenero(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame la fecha de nacimiento del alumno");
+					a.setFecha_nacimiento(formato.parse(vista.pedirRespuestaString()));
+					vista.mostrarMensaje("Dame el cilo del alumno");
+					a.setCiclo(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el curso del alumno");
+					a.setCurso(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el codigo del Grupo");
+					if (modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()).equals(null)) {
+						vista.mostrarMensaje("El Grupo insertado no existe, ¿deseas crearlo?");
+						if (vista.pedirRespuestaString().equalsIgnoreCase("si")) {
+							vista.mostrarMensaje("Dame el nombre del Grupo");
+							Grupo g = new Grupo(0, vista.pedirRespuestaString());
+							modelo.insertarGrupo(g);
+						} else {
+							vista.mostrarMensaje("Alumno no creado");
 						}
-						else {
-							a.setGrupo(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()));
-							modelo.insertarAlumno(a);
-						}	
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					} else {
+						a.setGrupo(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()));
+						modelo.insertarAlumno(a);
 					}
-					break;
-				case 2:
-					vista.mostrarMensaje("Dame el nombre del Grupo");
-					Grupo g = new Grupo(0, vista.pedirRespuestaString());
-					break;
-				case 3:
-					alumnos = modelo.mostrarTodosAlumnos();
-					vista.mostrarAlumnos(alumnos);
-					break;
-				case 4:
-					
-					break;
-				case 5:
-					
-					break;
-				case 6:
-					
-					break;
-				case 7:
-					
-					break;
-				case 8:
-					
-					break;
-				case 9:
-					
-					break;
-				default:
-					break;
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				break;
+			case 2:
+				vista.mostrarMensaje("Dame el nombre del Grupo");
+				Grupo g = new Grupo(0, vista.pedirRespuestaString());
+				break;
+			case 3:
+				alumnos = modelo.mostrarTodosAlumnos();
+				vista.mostrarAlumnos(alumnos);
+				break;
+			case 4:
+
+				break;
+			case 5:
+
+				break;
+			case 6:
+
+				break;
+			case 7:
+
+				break;
+			case 8:
+
+				break;
+			case 9:
+
+				break;
+			default:
+				break;
 			}
-		}while(res != 12);
-			
-		
-		
-		
-//		System.out.println("Que alumno quieres modificar? Dame su codigo");
-//		Alumno a2 = modelo.mostrarAlumnoPorCodigo(entrada.nextInt());
-//		entrada.nextLine();
-//		System.out.println("A que grupo quieres cambiarle? Dame su codigo");
-//		grupos = modelo.mostrarTodosGrupos();
-//		for (Grupo grupo : grupos) {
-//			System.out.println(grupo.toString());
-//		}
-//		g = modelo.buscarGrupoPorCodigo(entrada.nextInt());
-//		entrada.nextLine();
-//		a2.setGrupo(g);
-//		modelo.modificarAlumno(a2);
-//		
-//		//4
-//		System.out.println("EJERCICIO 4:");
-//		System.out.println("Que grupo quieres guardar en JSON? Dame su codigo");
-//		modelo.guardarenJSON(entrada.nextInt());
-//		entrada.nextLine();
-//		entrada.close();
+		} while (res != 12);
+
 	}
-	
 
 }
