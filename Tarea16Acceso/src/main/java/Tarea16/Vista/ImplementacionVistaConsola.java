@@ -21,11 +21,10 @@ public class ImplementacionVistaConsola implements InterfazVista{
 		System.out.println("5: Modificar Alumno");
 		System.out.println("6: Borrar Alumno");
 		System.out.println("7: Borrar Alumno por Curso");
-		System.out.println("8: Modificar Alumno");
-		System.out.println("9: Buscar Grupo por Codigo");
-		System.out.println("10: Mostrar Alumnos por Grupo");
-		System.out.println("11: Mostrar Alumno por Codigo");
-		System.out.println("12: Salir");
+		System.out.println("8: Buscar Grupo por Codigo");
+		System.out.println("9: Mostrar Alumnos por Grupo");
+		System.out.println("10: Mostrar Alumno por Codigo");
+		System.out.println("11: Salir");
 	}
 
 	@Override
@@ -41,12 +40,6 @@ public class ImplementacionVistaConsola implements InterfazVista{
 		// TODO Auto-generated method stub
 		String respuesta = entrada.nextLine();
 		return respuesta;
-	}
-	
-	@Override
-	public Grupo crearGrupo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

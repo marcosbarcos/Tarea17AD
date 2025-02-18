@@ -9,7 +9,6 @@ import Tarea16.Entidades.Grupo;
 public interface InterfazVista {
 
 	void mostrarMenu();
-	Grupo crearGrupo();
 	void mostrarAlumnos(List<Alumno> alumnos);
 	void mostrarAlumnosmasCodigo(List<Alumno> alumnos);
 	void mostrarAlumno(Alumno alumnos);

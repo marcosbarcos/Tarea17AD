@@ -73,41 +73,90 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		try {
 			emf = Persistence.createEntityManagerFactory("Persistencia");
 			em = emf.createEntityManager();
-			alumnosHibernate = em.createQuery("From alumnos").getResultList();
+			alumnosHibernate = em.createQuery("FROM grupos").getResultList();
 			List<Alumno> alumnos = new ArrayList<Alumno>();
 			for (AlumnoHibernate alumnoHibernate : alumnosHibernate) {
 				alumnos.add(convertirAlumno(alumnoHibernate));
 			}
-			emf.close();
-			em.close();
 			return alumnos;
 		} catch (Exception e) {
-			if(em.getTransaction().isActive()) {
-				em.getTransaction().rollback();
-			}
 			logger.error("Transaccion Fallida");
-			emf.close();
-			em.close();
-			return null;
-		}
-
+		} finally {
+	        if (em != null) {
+	            em.close();
+	        }
+	        if (emf != null) {
+	            emf.close();
+	        }
+	    }
+		return null;
 	}
 
 	@Override
 	public List<Grupo> mostrarTodosGrupos() {
-		// TODO Auto-generated method stub
+		List<GrupoHibernate> gruposHibernate = new ArrayList<GrupoHibernate>();
+		try {
+			emf = Persistence.createEntityManagerFactory("Persistencia");
+			em = emf.createEntityManager();
+			gruposHibernate = em.createQuery("FROM grupos").getResultList();
+			List<Grupo> grupos = new ArrayList<Grupo>();
+			for (GrupoHibernate grupoH : gruposHibernate) {
+				grupos.add(convertirGrupo(grupoH));
+			}
+			return grupos;
+		}catch(Exception e) {
+			logger.error("Transaccion Fallida");
+		}finally {
+			if(em != null) {
+				em.close();
+			}
+			if (emf != null) {
+				emf.close();
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public int modificarAlumno(Alumno alumno) {
-		// TODO Auto-generated method stub
+		try {
+			emf = Persistence.createEntityManagerFactory("Persistencia");
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			AlumnoHibernate alumnoHibernate = convertirAlumnoHibernate(alumno);
+			AlumnoHibernate buscarAlumno = em.find(AlumnoHibernate.class, alumnoHibernate.getNia());
+			if(buscarAlumno != null) {
+				buscarAlumno.setNombre(alumnoHibernate.getNombre());
+				buscarAlumno.setApellidos(alumnoHibernate.getApellidos());
+				buscarAlumno.setGenero(alumnoHibernate.getGenero());
+				buscarAlumno.setFecha_nacimiento(alumnoHibernate.getFecha_nacimiento());
+				buscarAlumno.setCiclo(alumnoHibernate.getCiclo());
+				buscarAlumno.setCurso(alumnoHibernate.getCurso());
+				buscarAlumno.setGrupo(alumnoHibernate.getGrupo());
+				em.merge(buscarAlumno);
+				em.getTransaction().commit();
+			}
+		}catch(Exception e) {
+			if(em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			logger.error("Transaccion Fallida");
+		}finally {
+			if(em != null) {
+				em.close();
+			}
+			if(emf != null) {
+				emf.close();
+			}
+ 		}
+
+		
 		return 0;
 	}
 
 	@Override
 	public void borrarAlumno(int id) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -131,7 +180,16 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 
 	@Override
 	public Alumno mostrarAlumnoPorCodigo(int codigo) {
-		// TODO Auto-generated method stub
+		try {
+			emf = Persistence.createEntityManagerFactory("Persistencia");
+			em = emf.createEntityManager();
+			em.createQuery("FROM alumnos");
+		}catch(Exception e
+				
+				
+				) {
+			
+		}
 		return null;
 	}
 	
