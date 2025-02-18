@@ -23,12 +23,10 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	@Override
 	public int insertarAlumno(Alumno alumno) {
 		AlumnoHibernate alumnoHB = convertirAlumnoHibernate(alumno);
+		em = emf.createEntityManager();
 		try {
-			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			for (int i = 0; i < 50; i++) {
-				em.persist(alumnoHB);
-			}
+			em.persist(alumnoHB);
 			em.getTransaction().commit();
 			em.close();
 			return 1;
@@ -46,8 +44,8 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	@Override
 	public int insertarGrupo(Grupo grupo) {
 		GrupoHibernate grupoo = convertirGrupoHibernate(grupo);
+		em = emf.createEntityManager();
 		try {
-			em = emf.createEntityManager();
 			em.getTransaction().begin();
 			em.persist(grupoo);
 			em.getTransaction().commit();
@@ -66,8 +64,8 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	@Override
 	public List<Alumno> mostrarTodosAlumnos() {
 		List<AlumnoHibernate> alumnosHibernate = new ArrayList<AlumnoHibernate>();
+		em = emf.createEntityManager();
 		try {
-			em = emf.createEntityManager();
 			alumnosHibernate = em.createQuery("FROM grupos").getResultList();
 			List<Alumno> alumnos = new ArrayList<Alumno>();
 			for (AlumnoHibernate alumnoHibernate : alumnosHibernate) {
@@ -88,8 +86,8 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	@Override
 	public List<Grupo> mostrarTodosGrupos() {
 		List<GrupoHibernate> gruposHibernate = new ArrayList<GrupoHibernate>();
+		em = emf.createEntityManager();
 		try {
-			em = emf.createEntityManager();
 			gruposHibernate = em.createQuery("FROM grupos").getResultList();
 			List<Grupo> grupos = new ArrayList<Grupo>();
 			for (GrupoHibernate grupoH : gruposHibernate) {
@@ -111,8 +109,8 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 
 	@Override
 	public int modificarAlumno(Alumno alumno) {
+		em = emf.createEntityManager();
 		try {
-			em = emf.createEntityManager();
 			em.getTransaction().begin();
 			AlumnoHibernate alumnoHibernate = convertirAlumnoHibernate(alumno);
 			AlumnoHibernate buscarAlumno = em.find(AlumnoHibernate.class, alumnoHibernate.getNia());
@@ -143,20 +141,33 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 
 	@Override
 	public void borrarAlumno(int id) {
-		
+		em = emf.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			AlumnoHibernate ah = em.find(AlumnoHibernate.class, id);
+			em.remove(ah);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			if (em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			logger.error("Transaccion Fallida");
+		} finally {
+			em.close();
+		}
 		
 	}
 
 	@Override
 	public void borrarAlumnoporCurso(String curso) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public Grupo buscarGrupoPorCodigo(int codigo) {
+		em = emf.createEntityManager();
 		try {
-			em = emf.createEntityManager();
 			GrupoHibernate gh = (GrupoHibernate) em.createQuery("FROM grupo WHERE codigo = :codigoGrupo")
 					.setParameter("codigoGrupo", codigo)
 					.getSingleResult();
@@ -176,17 +187,36 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 
 	@Override
 	public List<Alumno> mostrarAlumnosporGrupo(Grupo grupo) {
-		// TODO Auto-generated method stub
+		List<AlumnoHibernate> alumnosHB = new ArrayList<AlumnoHibernate>();
+		em = emf.createEntityManager();
+		try {
+			em.createQuery("FROM alumnos WHERE idgrupo = :codigoGrupo")
+			.setParameter("codigoGrupo", grupo)
+			.getResultList();
+		}catch(Exception e) {
+			logger.error("Transaccion Fallida");
+		}finally {
+			if(em != null) {
+				em.close();
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public Alumno mostrarAlumnoPorCodigo(int codigo) {
+		em = emf.createEntityManager();
 		try {
-			em = emf.createEntityManager();
-			em.createQuery("FROM alumnos WHERE codigo");
+			AlumnoHibernate ah = (AlumnoHibernate) em.createQuery("FROM alumnos WHERE codigo = :codigo")
+			.setParameter(":codigo", codigo)
+			.getSingleResult();
+			return convertirAlumno(ah);
 		}catch(Exception e) {
-			
+			logger.error("Trsansaccion Fallida");
+		}finally {
+			if(em != null) {
+				em.close();
+			}
 		}
 		return null;
 	}
