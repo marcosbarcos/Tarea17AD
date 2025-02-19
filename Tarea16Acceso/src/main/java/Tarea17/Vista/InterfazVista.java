@@ -1,10 +1,10 @@
-package Tarea16.Vista;
+package Tarea17.Vista;
 
 import java.util.List;
 import java.util.Scanner;
 
-import Tarea16.Entidades.Alumno;
-import Tarea16.Entidades.Grupo;
+import Tarea17.Entidades.Alumno;
+import Tarea17.Entidades.Grupo;
 
 public interface InterfazVista {
 

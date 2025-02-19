@@ -3,8 +3,8 @@
 	
 	<persistence-unit name="Persistencia">
 	
-		<class>Tarea16.Entidades.AlumnoHibernate</class>
-		<class>Tarea16.Entidades.GrupoHibernate</class>
+		<class>Tarea17.Entidades.AlumnoHibernate</class>
+		<class>Tarea17.Entidades.GrupoHibernate</class>
 	
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

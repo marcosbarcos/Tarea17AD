@@ -1,4 +1,4 @@
-package Tarea16.Entidades;
+package Tarea17.Entidades;
 
 import java.util.ArrayList;
 import java.util.List;

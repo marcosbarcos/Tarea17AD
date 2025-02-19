@@ -1,14 +1,14 @@
 
-package Tarea16.Controlador;
+package Tarea17.Controlador;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import Tarea16.Entidades.Alumno;
-import Tarea16.Entidades.Grupo;
-import Tarea16.Modelo.AlumnoDAO;
 
-import Tarea16.Vista.InterfazVista;
+import Tarea17.Entidades.Alumno;
+import Tarea17.Entidades.Grupo;
+import Tarea17.Modelo.AlumnoDAO;
+import Tarea17.Vista.InterfazVista;
 
 public class Controlador {
 

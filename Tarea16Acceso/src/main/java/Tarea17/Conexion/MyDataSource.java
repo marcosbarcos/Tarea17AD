@@ -1,4 +1,4 @@
-package Tarea16.Conexion;
+package Tarea17.Conexion;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,10 +1,10 @@
-package Tarea16.Ejecutadores;
+package Tarea17.Ejecutadores;
 
-import Tarea16.Controlador.Controlador;
-import Tarea16.Modelo.AlumnoDAO;
-import Tarea16.Modelo.AlumnoImplementacionHiberante;
-import Tarea16.Vista.ImplementacionVistaConsola;
-import Tarea16.Vista.InterfazVista;
+import Tarea17.Controlador.Controlador;
+import Tarea17.Modelo.AlumnoDAO;
+import Tarea17.Modelo.AlumnoImplementacionHiberante;
+import Tarea17.Vista.ImplementacionVistaConsola;
+import Tarea17.Vista.InterfazVista;
 
 public class EjecutadorHibernate {
 public static void main(String[] args) {

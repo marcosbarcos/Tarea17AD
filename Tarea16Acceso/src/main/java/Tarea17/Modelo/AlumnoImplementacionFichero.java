@@ -1,11 +1,11 @@
-package Tarea16.Modelo;
+package Tarea17.Modelo;
 
 import java.util.List;
 
-import Tarea16.Entidades.Alumno;
-import Tarea16.Entidades.Grupo;
+import Tarea17.Entidades.Alumno;
+import Tarea17.Entidades.Grupo;
 
-public class AlumnoImplementacionXML implements AlumnoDAO{
+public class AlumnoImplementacionFichero implements AlumnoDAO{
 
 	@Override
 	public int insertarGrupo(Grupo grupo) {
@@ -66,6 +66,5 @@ public class AlumnoImplementacionXML implements AlumnoDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

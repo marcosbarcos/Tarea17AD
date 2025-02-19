@@ -1,41 +1,22 @@
-package Tarea16.Entidades;
+package Tarea17.Entidades;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name ="alumnos")
-public class AlumnoHibernate implements Serializable{
-	
-	@Id
+public class Alumno implements Serializable{
 	private int nia;
-	@Column(name = "nombre", nullable = false, length = 30)
 	private String nombre;
-	@Column(name = "apellidos", nullable = false, length = 50)
 	private String apellidos;
-	@Column(name = "genero", nullable = false, length = 1)
 	private String genero;
-	@Column(name = "fecha_nacimiento", nullable = false)
 	private Date fecha_nacimiento;
-	@Column(name = "ciclo", nullable = true, length = 30)
 	private String ciclo;
-	@Column(name = "curso", nullable = true, length = 30)
 	private String curso;
-	@ManyToOne
-	@JoinColumn(name = "idgrupo", nullable = true)
-	private GrupoHibernate grupo;
+	private Grupo grupo;
 	
-public AlumnoHibernate() {
+public Alumno() {
 }
 
-public AlumnoHibernate(int nia, String nombre, String apellidos, String genero, Date fecha_nacimiento, String ciclo, String curso, GrupoHibernate grupo) {
+public Alumno(int nia, String nombre, String apellidos, String genero, Date fecha_nacimiento, String ciclo, String curso, Grupo grupo) {
 	this.nia = nia;
 	this.nombre = nombre;
 	this.apellidos = apellidos;
@@ -103,11 +84,11 @@ public void setCurso(String curso) {
 	this.curso = curso;
 }
 
-public GrupoHibernate getGrupo() {
+public Grupo getGrupo() {
 	return grupo;
 }
 
-public void setGrupo(GrupoHibernate grupo) {
+public void setGrupo(Grupo grupo) {
 	this.grupo = grupo;
 }
 
@@ -121,4 +102,3 @@ public String toString() {
 
 
 }
-

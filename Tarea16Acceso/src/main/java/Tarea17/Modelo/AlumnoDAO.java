@@ -1,9 +1,9 @@
-package Tarea16.Modelo;
+package Tarea17.Modelo;
 
 import java.util.List;
 
-import Tarea16.Entidades.Alumno;
-import Tarea16.Entidades.Grupo;
+import Tarea17.Entidades.Alumno;
+import Tarea17.Entidades.Grupo;
 
 public interface AlumnoDAO {
 

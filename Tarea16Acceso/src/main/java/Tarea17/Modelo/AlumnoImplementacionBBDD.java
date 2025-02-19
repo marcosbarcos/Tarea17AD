@@ -1,4 +1,4 @@
-package Tarea16.Modelo;
+package Tarea17.Modelo;
 
 
 import java.sql.Connection;
@@ -11,10 +11,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-import Tarea16.Conexion.MyDataSource;
-import Tarea16.Entidades.Alumno;
-import Tarea16.Entidades.Grupo;
+import Tarea17.Conexion.MyDataSource;
+import Tarea17.Entidades.Alumno;
+import Tarea17.Entidades.Grupo;
 
 
 public class AlumnoImplementacionBBDD implements AlumnoDAO{
