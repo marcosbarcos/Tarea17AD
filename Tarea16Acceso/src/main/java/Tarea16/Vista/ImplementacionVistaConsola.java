@@ -29,7 +29,6 @@ public class ImplementacionVistaConsola implements InterfazVista{
 
 	@Override
 	public int pedirRespuestaInt() {
-		// TODO Auto-generated method stub
 		int num = entrada.nextInt();
 		entrada.nextLine();
 		return num;
@@ -37,14 +36,12 @@ public class ImplementacionVistaConsola implements InterfazVista{
 	
 	@Override
 	public String pedirRespuestaString() {
-		// TODO Auto-generated method stub
 		String respuesta = entrada.nextLine();
 		return respuesta;
 	}
 
 	@Override
 	public void mostrarAlumnos(List<Alumno> alumnos) {
-		// TODO Auto-generated method stub
 		for (Alumno alumno : alumnos) {
 			System.out.println(alumno.toString());
 		}
@@ -52,13 +49,11 @@ public class ImplementacionVistaConsola implements InterfazVista{
 
 	@Override
 	public void mostrarAlumno(Alumno alumno) {
-		// TODO Auto-generated method stub
 		System.out.println(alumno.toString());
 	}
 
 	@Override
 	public void mostrarAlumnosmasCodigo(List<Alumno> alumnos) {
-		// TODO Auto-generated method stub
 		for (Alumno alumno : alumnos) {
 			System.out.println(alumno.getNia() + ", " + alumno.getNombre());
 		}
@@ -66,8 +61,19 @@ public class ImplementacionVistaConsola implements InterfazVista{
 
 	@Override
 	public void mostrarMensaje(String string) {
-		// TODO Auto-generated method stub
 		System.out.println(string);
+	}
+
+	@Override
+	public void mostrarGrupos(List<Grupo> grupos) {
+		for (Grupo grupo : grupos) {
+			System.out.println(grupo.toString());
+		}
+	}
+
+	@Override
+	public void mostrarGrupo(Grupo grupo) {
+		System.out.println(grupo.toString());
 	}
 
 

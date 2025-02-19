@@ -61,12 +61,13 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Alumno> mostrarTodosAlumnos() {
 		List<AlumnoHibernate> alumnosHibernate = new ArrayList<AlumnoHibernate>();
 		em = emf.createEntityManager();
 		try {
-			alumnosHibernate = em.createQuery("FROM GrupoHibernate").getResultList();
+			alumnosHibernate = em.createQuery("FROM AlumnoHibernate").getResultList();
 			List<Alumno> alumnos = new ArrayList<Alumno>();
 			for (AlumnoHibernate alumnoHibernate : alumnosHibernate) {
 				alumnos.add(convertirAlumno(alumnoHibernate));
@@ -83,6 +84,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Grupo> mostrarTodosGrupos() {
 		List<GrupoHibernate> gruposHibernate = new ArrayList<GrupoHibernate>();
@@ -112,16 +114,15 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		em = emf.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			AlumnoHibernate alumnoHibernate = convertirAlumnoHibernate(alumno);
-			AlumnoHibernate buscarAlumno = em.find(AlumnoHibernate.class, alumnoHibernate.getNia());
+			AlumnoHibernate buscarAlumno = em.find(AlumnoHibernate.class, alumno.getNia());
 			if(buscarAlumno != null) {
-				buscarAlumno.setNombre(alumnoHibernate.getNombre());
-				buscarAlumno.setApellidos(alumnoHibernate.getApellidos());
-				buscarAlumno.setGenero(alumnoHibernate.getGenero());
-				buscarAlumno.setFecha_nacimiento(alumnoHibernate.getFecha_nacimiento());
-				buscarAlumno.setCiclo(alumnoHibernate.getCiclo());
-				buscarAlumno.setCurso(alumnoHibernate.getCurso());
-				buscarAlumno.setGrupo(alumnoHibernate.getGrupo());
+				buscarAlumno.setNombre(alumno.getNombre());
+				buscarAlumno.setApellidos(alumno.getApellidos());
+				buscarAlumno.setGenero(alumno.getGenero());
+				buscarAlumno.setFecha_nacimiento(alumno.getFecha_nacimiento());
+				buscarAlumno.setCiclo(alumno.getCiclo());
+				buscarAlumno.setCurso(alumno.getCurso());
+				buscarAlumno.setGrupo(convertirGrupoHibernate(alumno.getGrupo()));
 				em.merge(buscarAlumno);
 				em.getTransaction().commit();
 				return 1;
@@ -158,9 +159,30 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void borrarAlumnoporCurso(String curso) {
-		
+		List<AlumnoHibernate> alumnosCurso = new ArrayList<AlumnoHibernate>();
+		em = emf.createEntityManager();
+		try {
+			alumnosCurso = em.createQuery("FROM AlumnoHibernate WHERE curso = :cursoBuscar")
+			.setParameter("cursoBuscar", curso)
+			.getResultList();
+			em.getTransaction().begin();
+			for (AlumnoHibernate alumnoHibernate : alumnosCurso) {
+				em.remove(alumnosCurso);
+			}
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			if(em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			logger.error("Transaccion Fallida");
+		}finally {
+			if(em != null) {
+				em.close();
+			}
+		}
 		
 	}
 
@@ -207,8 +229,8 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 	public Alumno mostrarAlumnoPorCodigo(int codigo) {
 		em = emf.createEntityManager();
 		try {
-			AlumnoHibernate ah = (AlumnoHibernate) em.createQuery("FROM AlumnoHibernate WHERE codigo = :codigo")
-			.setParameter(":codigo", codigo)
+			AlumnoHibernate ah = (AlumnoHibernate) em.createQuery("FROM AlumnoHibernate WHERE nia = :codigo")
+			.setParameter("codigo", codigo)
 			.getSingleResult();
 			return convertirAlumno(ah);
 		}catch(Exception e) {
@@ -230,7 +252,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		alumno.setFecha_nacimiento(a.getFecha_nacimiento());
 		alumno.setCiclo(a.getCiclo());
 		alumno.setCurso(a.getCurso());
-		alumno.setGrupo(a.getGrupo());
+		alumno.setGrupo(convertirGrupo(a.getGrupo()));
 		return alumno;
 	}
 	
@@ -243,7 +265,7 @@ public class AlumnoImplementacionHiberante implements AlumnoDAO {
 		alumno.setFecha_nacimiento(a.getFecha_nacimiento());
 		alumno.setCiclo(a.getCiclo());
 		alumno.setCurso(a.getCurso());
-		alumno.setGrupo(a.getGrupo());
+		alumno.setGrupo(convertirGrupoHibernate(a.getGrupo()));
 		return alumno;
 	}
 	

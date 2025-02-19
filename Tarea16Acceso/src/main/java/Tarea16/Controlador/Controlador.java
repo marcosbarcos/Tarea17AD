@@ -39,17 +39,20 @@ public class Controlador {
 					vista.mostrarMensaje("Dame el curso del alumno");
 					a.setCurso(vista.pedirRespuestaString());
 					vista.mostrarMensaje("Dame el codigo del Grupo");
-					if (modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()).equals(null)) {
+					int codGrupo = vista.pedirRespuestaInt();
+					if (modelo.buscarGrupoPorCodigo(codGrupo) == null) {
 						vista.mostrarMensaje("El Grupo insertado no existe, ¿deseas crearlo?");
 						if (vista.pedirRespuestaString().equalsIgnoreCase("si")) {
 							vista.mostrarMensaje("Dame el nombre del Grupo");
 							Grupo g = new Grupo(0, vista.pedirRespuestaString());
 							modelo.insertarGrupo(g);
+							a.setGrupo(g);
+							modelo.insertarAlumno(a);
 						} else {
 							vista.mostrarMensaje("Alumno no creado");
 						}
 					} else {
-						a.setGrupo(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()));
+						a.setGrupo(modelo.buscarGrupoPorCodigo(codGrupo));
 						modelo.insertarAlumno(a);
 					}
 				} catch (ParseException e) {
@@ -59,34 +62,101 @@ public class Controlador {
 			case 2:
 				vista.mostrarMensaje("Dame el nombre del Grupo");
 				Grupo g = new Grupo(0, vista.pedirRespuestaString());
+				modelo.insertarGrupo(g);
 				break;
 			case 3:
 				alumnos = modelo.mostrarTodosAlumnos();
-				vista.mostrarAlumnos(alumnos);
+				if(alumnos == null) {
+					vista.mostrarMensaje("No hay alumnos");
+				}else {
+					vista.mostrarAlumnos(alumnos);
+				}
+				
 				break;
 			case 4:
-
+				grupos = modelo.mostrarTodosGrupos();
+				vista.mostrarGrupos(grupos);
 				break;
 			case 5:
-
+				Alumno a = new Alumno();
+				vista.mostrarMensaje("Que alumno quieres modificar, inserte su codigo");
+				a = modelo.mostrarAlumnoPorCodigo(vista.pedirRespuestaInt());
+				if(a != null) {
+					vista.mostrarMensaje("Dame el nuevo nombre del alumno");
+					a.setNombre(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el nuevo apellido del alumno");
+					a.setApellidos(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el nuevo genero del alumno");
+					a.setGenero(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame la nueva fecha de nacimiento del alumno");
+					try {
+						a.setFecha_nacimiento(formato.parse(vista.pedirRespuestaString()));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					vista.mostrarMensaje("Dame el nuevo ciclo del alumno");
+					a.setCiclo(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el nuevo curso del alumno");
+					a.setCurso(vista.pedirRespuestaString());
+					vista.mostrarMensaje("Dame el nuevo codigo del Grupo");
+					int codGrupo = vista.pedirRespuestaInt();
+					if (modelo.buscarGrupoPorCodigo(codGrupo) == null) {
+						vista.mostrarMensaje("El Grupo insertado no existe, ¿deseas crearlo?");
+						if (vista.pedirRespuestaString().equalsIgnoreCase("si")) {
+							vista.mostrarMensaje("Dame el nombre del Grupo");
+							Grupo grup = new Grupo(0, vista.pedirRespuestaString());
+							modelo.insertarGrupo(grup);
+							a.setGrupo(grup);
+						} else {
+							vista.mostrarMensaje("Alumno no modificado");
+						}
+					} else {
+						a.setGrupo(modelo.buscarGrupoPorCodigo(codGrupo));
+					}
+					modelo.modificarAlumno(a);
+					vista.mostrarMensaje("Alumno Modificado");
+				} 
+				else {
+					vista.mostrarMensaje("No se ha encontrado un alumno con este codigo");
+				}
+				
 				break;
 			case 6:
-
+				vista.mostrarMensaje("Dame el codigo del alumno a eliminar");
+				modelo.borrarAlumno(vista.pedirRespuestaInt());
 				break;
 			case 7:
-
+				vista.mostrarMensaje("Dame el curso de los alumnos a eliminar");
+				modelo.borrarAlumnoporCurso(vista.pedirRespuestaString());
 				break;
 			case 8:
-
+				vista.mostrarMensaje("Dame el codigo del grupo a buscar");
+				Grupo grup = modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt());
+				if(grup == null) {
+					vista.mostrarMensaje("Grupo no encontrado");
+				}
+				else {
+					vista.mostrarGrupo(grup);
+				}
 				break;
 			case 9:
-
+				vista.mostrarMensaje("De cual grupo quieres mostrar todos los alumnos? Dame el codigo");
+				grupos = modelo.mostrarTodosGrupos();
+				vista.mostrarGrupos(grupos);
+				modelo.mostrarAlumnosporGrupo(modelo.buscarGrupoPorCodigo(vista.pedirRespuestaInt()));
+				break;
+			case 10:
+				vista.mostrarMensaje("Dame el codigo del alumno que quieras visualziar");
+				vista.mostrarAlumno(modelo.mostrarAlumnoPorCodigo(vista.pedirRespuestaInt()));
 				break;
 			default:
 				break;
 			}
-		} while (res != 12);
+		} while (res != 11);
 
 	}
 
 }
+
+	

@@ -30,12 +30,12 @@ public class AlumnoHibernate implements Serializable{
 	private String curso;
 	@ManyToOne
 	@JoinColumn(name = "idgrupo", nullable = true)
-	private Grupo grupo;
+	private GrupoHibernate grupo;
 	
 public AlumnoHibernate() {
 }
 
-public AlumnoHibernate(int nia, String nombre, String apellidos, String genero, Date fecha_nacimiento, String ciclo, String curso, Grupo grupo) {
+public AlumnoHibernate(int nia, String nombre, String apellidos, String genero, Date fecha_nacimiento, String ciclo, String curso, GrupoHibernate grupo) {
 	this.nia = nia;
 	this.nombre = nombre;
 	this.apellidos = apellidos;
@@ -103,11 +103,11 @@ public void setCurso(String curso) {
 	this.curso = curso;
 }
 
-public Grupo getGrupo() {
+public GrupoHibernate getGrupo() {
 	return grupo;
 }
 
-public void setGrupo(Grupo grupo) {
+public void setGrupo(GrupoHibernate grupo) {
 	this.grupo = grupo;
 }
 
