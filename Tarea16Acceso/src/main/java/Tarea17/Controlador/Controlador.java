@@ -61,7 +61,7 @@ public class Controlador {
 				break;
 			case 2:
 				vista.mostrarMensaje("Dame el nombre del Grupo");
-				Grupo g = new Grupo(0, vista.pedirRespuestaString());
+				Grupo g = new Grupo(vista.pedirRespuestaString());
 				modelo.insertarGrupo(g);
 				break;
 			case 3:

@@ -50,12 +50,12 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 
 	@Override
 	public int insertarGrupo(Grupo grupo) {
-		String sql = "INSERT INTO grupos (Codigo,Nombre)"
+		String sql = "INSERT INTO grupo (Codigo,Nombre)"
 				+ "VALUES (?,?)";
 		int result = 0;
 		try(Connection conexion = MyDataSource.getConnection();
 			PreparedStatement consulta = conexion.prepareStatement(sql)) {
-			consulta.setInt(1, grupo.getCodigo());
+			consulta.setInt(1, (cogerUltimoCodigo() + 1));
 			consulta.setString(2, grupo.getNombre());
 			result = consulta.executeUpdate();
 			logger.info("Grupo creado con exito");
@@ -246,7 +246,23 @@ public class AlumnoImplementacionBBDD implements AlumnoDAO{
 		return a;
 	}
 
-
+	public int cogerUltimoCodigo() {
+		String sql = "SELECT MAX(codigo) FROM grupo";
+		int feo = 0;
+		try (Connection conexion = MyDataSource.getConnection();
+				PreparedStatement ps = conexion.prepareStatement(sql)) {
+			try(ResultSet rs = ps.executeQuery()) {
+				while(rs.next()) {
+					feo = rs.getInt("MAX(codigo)");
+				}
+ 			}
+			return feo;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return feo;
+	}
 	
 
 }

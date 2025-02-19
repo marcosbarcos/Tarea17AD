@@ -13,6 +13,11 @@ public class Grupo {
 		this.nombre = nombre;
 	}
 	
+	public Grupo(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+	
 	public Grupo() {
 	}
 	
